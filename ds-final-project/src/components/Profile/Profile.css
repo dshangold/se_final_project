@@ -1,0 +1,15 @@
+.profile__logout-button {
+  background-color: #1db954;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  margin-bottom: 20px;
+  border-radius: 24px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.profile__logout-button:hover {
+  background-color: #17a44c;
+}
