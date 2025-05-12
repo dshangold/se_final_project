@@ -16,39 +16,41 @@ function Header() {
 
   const handleLoginSubmit = (e) => {
     e.preventDefault();
-    // Add login logic here
     closeLogin();
   };
 
   const handleRegisterSubmit = (e) => {
     e.preventDefault();
-    // Add register logic here
     closeRegister();
   };
 
   const CLIENT_ID = "cb18dd8395394c5c85fa5dd807ff5fd9";
-  const REDIRECT_URI = "http://localhost:3000/profile";
+  const REDIRECT_URI = "http://localhost:3000/callback";
   const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
   const RESPONSE_TYPE = "token";
   const SCOPES = ["user-top-read"];
 
-  const handleSpotifySignup = () => {
+  const handleSpotifyLogin = () => {
     window.location = `${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}&scope=${SCOPES.join(
       "%20"
     )}`;
   };
 
+  const handleSignUpClick = () => {
+    window.open("https://www.spotify.com/signup", "_blank");
+  };
+
   return (
     <header className="header">
       <div className="header__container">
-        <h1 className="header__logo">My Spotify App</h1>
+        <h1 className="header__logo">SPOTIFY TOP 10</h1>
         <div className="header__auth">
-          <button className="header__button" onClick={openLogin}>
+          <button className="header__button" onClick={handleSpotifyLogin}>
             Log In
           </button>
           <button
             className="header__button header__button--signup"
-            onClick={handleSpotifySignup}
+            onClick={handleSignUpClick}
           >
             Sign Up
           </button>
