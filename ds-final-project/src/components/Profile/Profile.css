@@ -1,15 +1,56 @@
-.profile__logout-button {
-  background-color: #1db954;
-  color: white;
-  border: none;
-  padding: 10px 16px;
-  margin-bottom: 20px;
-  border-radius: 24px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background-color 0.3s;
+.profile {
+  padding: 2rem;
+  max-width: 600px;
+  margin: 0 auto;
+  background-color: #121212;
+  color: #fff;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
 }
 
-.profile__logout-button:hover {
-  background-color: #17a44c;
+.profile-page {
+  background-color: #121212;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 64px 0 64px;
+}
+
+.profile__heading {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  color: #1db954;
+}
+
+.profile__track-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.profile__track-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #1e1e1e;
+  padding: 16px 24px;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  transition: background-color 0.3s ease;
+}
+
+.profile__track-item:hover {
+  background-color: #2a2a2a;
+}
+
+.profile__track-name {
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #fff;
+}
+
+.profile__track-artist {
+  font-size: 0.95rem;
+  color: #bbb;
 }

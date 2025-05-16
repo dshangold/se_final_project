@@ -13,6 +13,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/callback" element={<Profile />} />
         </Routes>
         <Footer />
       </div>

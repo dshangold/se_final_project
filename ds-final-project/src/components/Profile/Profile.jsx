@@ -1,55 +1,46 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import "./Profile.css";
+import { getAccessToken, getTopTracks } from "../../utils/api";
 
-function Profile() {
-  const [topTracks, setTopTracks] = useState([]);
-  const [token, setToken] = useState("");
+export default function Profile() {
+  const [tracks, setTracks] = useState([]);
 
   useEffect(() => {
-    const hash = window.location.hash;
-    let _token = window.localStorage.getItem("token");
-
-    if (!_token && hash) {
-      _token = hash
-        .substring(1)
-        .split("&")
-        .find((item) => item.startsWith("access_token"))
-        .split("=")[1];
-      window.location.hash = "";
-      window.localStorage.setItem("token", _token);
-    }
-
-    setToken(_token);
-
-    if (_token) {
-      fetch("https://api.spotify.com/v1/me/top/tracks?limit=5", {
-        headers: {
-          Authorization: `Bearer ${_token}`,
-        },
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          setTopTracks(data.items || []);
+    const code = new URLSearchParams(window.location.search).get("code");
+    console.log("Authorization code:", code);
+    if (code) {
+      getAccessToken(code)
+        .then((token) => {
+          window.history.replaceState(null, null, "/callback");
+          console.log("Access Token:", token);
+          return getTopTracks(token);
         })
-        .catch((err) => console.error("Failed to fetch tracks", err));
+        .then((items) => {
+          console.log("Top Tracks:", items);
+          setTracks(items);
+          console.log("Tracks in state:", tracks);
+        })
+        .catch((err) => {
+          console.error("Error fetching tracks:", err);
+        });
     }
   }, []);
 
   return (
-    <div className="profile">
-      <h2>Your Top 5 Tracks</h2>
-      <ul className="profile__tracks">
-        {topTracks.map((track) => (
-          <li key={track.id} className="profile__track">
-            <p>
-              {track.name} by{" "}
-              {track.artists.map((artist) => artist.name).join(", ")}
-            </p>
-            <audio controls src={track.preview_url}></audio>
-          </li>
-        ))}
-      </ul>
+    <div className="profile-page">
+      <div className="profile">
+        <h2 className="profile__heading">Your Top 5 Tracks</h2>
+        <ul className="profile__track-list">
+          {tracks.map((track) => (
+            <li key={track.id} className="profile__track-item">
+              <div className="profile__track-name">{track.name}</div>
+              <div className="profile__track-artist">
+                {track.artists[0].name}
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }
-
-export default Profile;

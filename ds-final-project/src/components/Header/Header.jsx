@@ -1,8 +1,10 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import "./Header.css";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import LoginModal from "../LoginModal/LoginModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
+import { handleLoginClick, handleSignUpClick } from "../../utils/api";
 
 function Header() {
   const [isLoginOpen, setIsLoginOpen] = useState(false);
@@ -24,28 +26,17 @@ function Header() {
     closeRegister();
   };
 
-  const CLIENT_ID = "cb18dd8395394c5c85fa5dd807ff5fd9";
-  const REDIRECT_URI = "http://localhost:3000/callback";
-  const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
-  const RESPONSE_TYPE = "token";
-  const SCOPES = ["user-top-read"];
-
-  const handleSpotifyLogin = () => {
-    window.location = `${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}&scope=${SCOPES.join(
-      "%20"
-    )}`;
-  };
-
-  const handleSignUpClick = () => {
-    window.open("https://www.spotify.com/signup", "_blank");
-  };
-
   return (
     <header className="header">
       <div className="header__container">
-        <h1 className="header__logo">SPOTIFY TOP 10</h1>
+        <div className="header__nav">
+          <Link to="/" className="header__button header__button--home">
+            Home
+          </Link>
+          <h1 className="header__logo">SPOTIFY TOP 5</h1>
+        </div>
         <div className="header__auth">
-          <button className="header__button" onClick={handleSpotifyLogin}>
+          <button className="header__button" onClick={handleLoginClick}>
             Log In
           </button>
           <button

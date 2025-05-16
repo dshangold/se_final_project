@@ -10,6 +10,12 @@
   align-items: center;
 }
 
+.header__nav {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
 .header__logo {
   font-size: 1.5rem;
   font-weight: bold;
@@ -29,6 +35,17 @@
   font-weight: bold;
   cursor: pointer;
   transition: background-color 0.3s;
+}
+
+.header__button--home {
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+  line-height: 1;
+}
+
+.header__home-link:hover {
+  color: #1db954;
 }
 
 .header__button:hover {
