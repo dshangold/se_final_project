@@ -1,30 +1,54 @@
 import React, { useEffect, useState } from "react";
 import "./Profile.css";
-import { getAccessToken, getTopTracks } from "../../utils/api";
+import { getAccessToken, getTopTracks, getUserProfile } from "../../utils/api";
 
-export default function Profile() {
+export default function Profile({ setUser }) {
   const [tracks, setTracks] = useState([]);
 
   useEffect(() => {
     const code = new URLSearchParams(window.location.search).get("code");
-    console.log("Authorization code:", code);
-    if (code) {
+    const storedToken = localStorage.getItem("spotify_access_token");
+    const storedTracks = localStorage.getItem("spotify_top_tracks");
+
+    if (storedToken && storedTracks) {
+      setTracks(JSON.parse(storedTracks));
+      getUserProfile(storedToken)
+        .then((profile) => {
+          localStorage.setItem("spotify_user", JSON.stringify(profile));
+          setUser(profile);
+        })
+        .catch(console.error);
+    } else if (storedToken) {
+      getUserProfile(storedToken)
+        .then((profile) => {
+          localStorage.setItem("spotify_user", JSON.stringify(profile));
+          setUser(profile);
+        })
+        .catch(console.error);
+
+      getTopTracks(storedToken)
+        .then((tracks) => {
+          localStorage.setItem("spotify_top_tracks", JSON.stringify(tracks));
+          setTracks(tracks);
+        })
+        .catch(console.error);
+    } else if (code) {
       getAccessToken(code)
         .then((token) => {
           window.history.replaceState(null, null, "/callback");
-          console.log("Access Token:", token);
-          return getTopTracks(token);
+          return Promise.all([getUserProfile(token), getTopTracks(token)]);
         })
-        .then((items) => {
-          console.log("Top Tracks:", items);
-          setTracks(items);
-          console.log("Tracks in state:", tracks);
+        .then(([profile, tracks]) => {
+          localStorage.setItem("spotify_user", JSON.stringify(profile));
+          localStorage.setItem("spotify_top_tracks", JSON.stringify(tracks));
+          setUser(profile);
+          setTracks(tracks);
         })
         .catch((err) => {
-          console.error("Error fetching tracks:", err);
+          console.error("Error during auth flow:", err);
         });
     }
-  }, []);
+  }, [setUser]);
 
   return (
     <div className="profile-page">

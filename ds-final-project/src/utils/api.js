@@ -43,6 +43,7 @@ export const getAccessToken = async (code) => {
 
   const data = await response.json();
   if (data.access_token) {
+    localStorage.setItem("spotify_access_token", data.access_token);
     return data.access_token;
   } else {
     throw new Error("Failed to retrieve access token: " + JSON.stringify(data));
@@ -65,4 +66,20 @@ export const getTopTracks = async (token) => {
   }
 
   return data.items;
+};
+
+export const getUserProfile = async (token) => {
+  const response = await fetch("https://api.spotify.com/v1/me", {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  const data = await response.json();
+  if (!response.ok) {
+    throw new Error("Error fetching user profile: " + JSON.stringify(data));
+  }
+
+  localStorage.setItem("spotify_user", JSON.stringify(data));
+  return data;
 };

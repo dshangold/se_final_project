@@ -7,3 +7,11 @@
   background-position: center;
   object-fit: contain;
 }
+
+.main__title {
+  color: #fff;
+}
+
+.main__subtitle {
+  color: #fff;
+}
