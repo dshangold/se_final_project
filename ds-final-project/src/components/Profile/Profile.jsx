@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./Profile.css";
 import { getAccessToken, getTopTracks, getUserProfile } from "../../utils/api";
+import { storeItems } from "../../utils/storageUtils";
 
 export default function Profile({ setUser }) {
   const [tracks, setTracks] = useState([]);
@@ -9,38 +10,41 @@ export default function Profile({ setUser }) {
     const code = new URLSearchParams(window.location.search).get("code");
     const storedToken = localStorage.getItem("spotify_access_token");
     const storedTracks = localStorage.getItem("spotify_top_tracks");
+    console.log(code);
 
     if (storedToken && storedTracks) {
       setTracks(JSON.parse(storedTracks));
       getUserProfile(storedToken)
         .then((profile) => {
-          localStorage.setItem("spotify_user", JSON.stringify(profile));
+          storeItems({ spotify_user: profile });
           setUser(profile);
         })
         .catch(console.error);
     } else if (storedToken) {
       getUserProfile(storedToken)
         .then((profile) => {
-          localStorage.setItem("spotify_user", JSON.stringify(profile));
+          storeItems({ spotify_user: profile });
           setUser(profile);
         })
         .catch(console.error);
 
       getTopTracks(storedToken)
         .then((tracks) => {
-          localStorage.setItem("spotify_top_tracks", JSON.stringify(tracks));
+          storeItems({ spotify_top_tracks: tracks });
           setTracks(tracks);
         })
         .catch(console.error);
     } else if (code) {
+      window.history.replaceState(null, null, "/callback");
       getAccessToken(code)
         .then((token) => {
-          window.history.replaceState(null, null, "/callback");
           return Promise.all([getUserProfile(token), getTopTracks(token)]);
         })
         .then(([profile, tracks]) => {
-          localStorage.setItem("spotify_user", JSON.stringify(profile));
-          localStorage.setItem("spotify_top_tracks", JSON.stringify(tracks));
+          storeItems({
+            spotify_user: profile,
+            spotify_top_tracks: tracks,
+          });
           setUser(profile);
           setTracks(tracks);
         })

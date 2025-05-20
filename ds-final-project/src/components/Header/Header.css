@@ -19,6 +19,7 @@
 .header__logo {
   font-size: 1.5rem;
   font-weight: bold;
+  font-family: "Sora Regular", Arial, Helvetica, sans-serif;
 }
 
 .header__avatar {
@@ -49,6 +50,7 @@
 .header__username {
   font-weight: bold;
   white-space: nowrap;
+  font-family: "Sora Regular", Arial, Helvetica, sans-serif;
 }
 
 .header__auth {
@@ -67,6 +69,7 @@
   cursor: pointer;
   transition: background-color 0.3s;
   text-decoration: none;
+  font-family: "Sora Regular", Arial, Helvetica, sans-serif;
 }
 
 .header__button--home {

@@ -22,6 +22,8 @@ function Header({ user, setUser }) {
   const handleLogout = () => {
     localStorage.removeItem("spotify_user");
     localStorage.removeItem("spotify_top_tracks");
+    localStorage.removeItem("spotify_access_token");
+    localStorage.removeItem("spotify_code_verifier");
     setUser(null);
     navigate("/");
   };

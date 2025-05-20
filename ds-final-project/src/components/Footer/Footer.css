@@ -4,4 +4,7 @@
 
 .footer__text {
   color: #fff;
+  font-family: "Sora Regular", Arial, Helvetica, sans-serif;
+  font-size: 8px;
+  margin: 0;
 }
