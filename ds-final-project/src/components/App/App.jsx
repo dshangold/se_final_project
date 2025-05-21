@@ -24,7 +24,7 @@ function App() {
       <div className="page__content">
         <Header user={user} setUser={setUser} />
         <Routes>
-          <Route path="/" element={<Main />} />
+          <Route path="/" element={<Main user={user} />} />
           <Route path="/profile" element={<Profile setUser={setUser} />} />
           <Route path="/callback" element={<Profile setUser={setUser} />} />
         </Routes>

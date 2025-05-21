@@ -4,3 +4,10 @@
   font-weight: normal;
   src: local("Sora Regular"), url("../assets/Sora-Regular.woff") format("woff");
 }
+
+@font-face {
+  font-family: "Play";
+  font-style: normal;
+  font-weight: normal;
+  src: local("Play"), url("../assets/Play-Regular.woff") format("woff");
+}

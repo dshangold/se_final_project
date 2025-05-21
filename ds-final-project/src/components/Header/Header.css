@@ -19,7 +19,7 @@
 .header__logo {
   font-size: 1.5rem;
   font-weight: bold;
-  font-family: "Sora Regular", Arial, Helvetica, sans-serif;
+  font-family: "Play", Arial, Helvetica, sans-serif;
 }
 
 .header__avatar {
@@ -50,7 +50,7 @@
 .header__username {
   font-weight: bold;
   white-space: nowrap;
-  font-family: "Sora Regular", Arial, Helvetica, sans-serif;
+  font-family: "Play", Arial, Helvetica, sans-serif;
 }
 
 .header__auth {
@@ -69,7 +69,7 @@
   cursor: pointer;
   transition: background-color 0.3s;
   text-decoration: none;
-  font-family: "Sora Regular", Arial, Helvetica, sans-serif;
+  font-family: "Play", Arial, Helvetica, sans-serif;
 }
 
 .header__button--home {
@@ -89,5 +89,30 @@
 
 .header__button--signup {
   background-color: #191414;
-  color: #fff;
+  color: #1db954;
+}
+
+@media (max-width: 768px) {
+  .header__logo {
+    font-size: 20px;
+    margin-bottom: 16px;
+  }
+
+  .header__username {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 575px) {
+  .header__container {
+    flex-direction: column;
+  }
+
+  .header__nav,
+  .header__auth,
+  .header__profile {
+    width: 100%;
+    justify-content: flex-start;
+    margin-top: 10px;
+  }
 }

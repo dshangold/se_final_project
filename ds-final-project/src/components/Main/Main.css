@@ -3,44 +3,104 @@
   flex-direction: column;
   align-items: center;
   padding: 32px;
+  overflow: hidden;
 }
 
 .main__image-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 16px;
-  margin: 24px 0;
-  width: 100%;
-  max-width: 800px;
+  padding: 24px 0;
+}
+
+.main__image-wrapper {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  transition: transform 0.3s ease;
+  cursor: pointer;
 }
 
 .main__image {
   width: 100%;
-  aspect-ratio: 1 / 1;
+  height: auto;
   object-fit: cover;
-  border-radius: 16px;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.main__image-wrapper:hover .main__image {
+  transform: scale(1.05);
+  filter: brightness(1.1) saturate(1.2);
+}
+
+.main__overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  font-family: "Play", Arial, Helvetica, sans-serif;
+  font-size: 0.9rem;
+  text-align: center;
   opacity: 0;
-  transform: scale(0.95);
-  animation: fadeInZoom 1s ease-in-out forwards;
+  transform: translateY(100%);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.main__image-wrapper:hover .main__overlay {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .main__title {
   color: #fff;
-  font-family: "Sora Regular", Arial, Helvetica, sans-serif;
+  font-family: "Play", Arial, Helvetica, sans-serif;
   text-align: center;
   margin: 12px 0;
 }
 
 .main__subtitle {
   color: #fff;
-  font-family: "Sora Regular", Arial, Helvetica, sans-serif;
+  font-family: "Play", Arial, Helvetica, sans-serif;
   text-align: center;
+  font-size: 20px;
   margin: 12px 0;
 }
 
-@keyframes fadeInZoom {
-  to {
-    opacity: 1;
-    transform: scale(1);
+@media (max-width: 768px) {
+  .main__title {
+    font-size: 18px;
+    padding: 0 16px;
+    text-align: center;
+  }
+
+  .main__subtitle {
+    font-size: 14px;
+    padding: 0 16px;
+    text-align: center;
+  }
+
+  .main__image-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    padding: 0 12px;
+  }
+
+  .main__image {
+    width: 100%;
+    height: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .main__image-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .main__title,
+  .main__subtitle {
+    font-size: 16px;
   }
 }

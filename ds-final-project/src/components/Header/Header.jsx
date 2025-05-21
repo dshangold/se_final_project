@@ -1,22 +1,9 @@
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Header.css";
-import ModalWithForm from "../ModalWithForm/ModalWithForm";
-import LoginModal from "../LoginModal/LoginModal";
-import RegisterModal from "../RegisterModal/RegisterModal";
 import { handleLoginClick, handleSignUpClick } from "../../utils/api";
 
 function Header({ user, setUser }) {
-  const [isLoginOpen, setIsLoginOpen] = useState(false);
-  const [isRegisterOpen, setIsRegisterOpen] = useState(false);
-
-  const openLogin = () => setIsLoginOpen(true);
-  const closeLogin = () => setIsLoginOpen(false);
-
-  const openRegister = () => setIsRegisterOpen(true);
-  const closeRegister = () => setIsRegisterOpen(false);
-
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -28,16 +15,6 @@ function Header({ user, setUser }) {
     navigate("/");
   };
 
-  const handleLoginSubmit = (e) => {
-    e.preventDefault();
-    closeLogin();
-  };
-
-  const handleRegisterSubmit = (e) => {
-    e.preventDefault();
-    closeRegister();
-  };
-
   return (
     <header className="header">
       <div className="header__container">
@@ -45,7 +22,7 @@ function Header({ user, setUser }) {
           <Link to="/" className="header__button">
             Home
           </Link>
-          <h1 className="header__logo">SPOTIFY TOP 5</h1>
+          <h1 className="header__logo">VibeCheck</h1>
         </div>
 
         {user ? (
@@ -79,17 +56,6 @@ function Header({ user, setUser }) {
           </div>
         )}
       </div>
-
-      <LoginModal
-        isOpen={isLoginOpen}
-        onClose={closeLogin}
-        onSubmit={handleLoginSubmit}
-      />
-      <RegisterModal
-        isOpen={isRegisterOpen}
-        onClose={closeRegister}
-        onSubmit={handleRegisterSubmit}
-      />
     </header>
   );
 }
