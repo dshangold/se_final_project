@@ -1,13 +1,8 @@
 import { generateRandomString, generateCodeChallenge } from "./pkce";
 
-let baseUrl = "";
-
-if (typeof window !== "undefined") {
-  baseUrl = window.location.origin;
-}
-
 export const CLIENT_ID = "cb18dd8395394c5c85fa5dd807ff5fd9";
-export const REDIRECT_URI = `${baseUrl}/se_final_project/ds-final-project/callback`;
+export const REDIRECT_URI =
+  "https://dshangold.github.io/se_final_project/#callback";
 export const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
 export const SCOPES = ["user-top-read", "user-read-private"];
 
