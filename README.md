@@ -11,3 +11,7 @@ There is a lot of room for improvement, and am always open to feedback. Here are
 3. Make homepage customizable for users to decorate with their own favorite albums
 
 I will continue to build off this framework and grow the project even further!
+
+**Github**
+
+[Link to Github](https://github.com/dshangold/se_final_project)
