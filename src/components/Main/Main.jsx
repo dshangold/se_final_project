@@ -13,7 +13,7 @@ function Main({ user }) {
       <h1 className="main__title">
         {user
           ? "More vibes coming soon..."
-          : "Discover your Top 5 listened to tracks from your favorite artist!"}
+          : "Discover your Top 5 listened to tracks from your favorite artists!"}
       </h1>
 
       <div className="main__image-grid">
